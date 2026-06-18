@@ -1,0 +1,37 @@
+name: Daily Activity
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update README
+        run: python src/update_readme.py
+
+      - name: Generate Statistics
+        run: python src/generate_stats.py
+
+      - name: Generate Changelog
+        run: python src/changelog_generator.py || echo "Git repo not fully configured or no commits"
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "action@github.com"
+          
+          git add .
+          git commit -m "docs: automated update" || exit 0
+          git push
