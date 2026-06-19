@@ -1,3 +1,6 @@
+930de68 s
+ca2dd4d ci: implement recommended best practices for workflow permissions and rebasing
+302151c docs: automated update
 cc91d0a ci: add git pull rebase to avoid non-fast-forward push errors
 f990a57 docs: automated update
 01690d8 ci: add push trigger to workflow
