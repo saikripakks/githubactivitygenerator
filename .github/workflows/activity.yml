@@ -20,6 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Sync with latest master
+        run: |
+          git pull --rebase origin master
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -31,14 +35,16 @@ jobs:
         run: python src/generate_stats.py
 
       - name: Generate Changelog
-        run: python src/changelog_generator.py || echo "Git repo not fully configured or no commits"
+        run: python src/changelog_generator.py || echo "No changelog generated"
 
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "action@github.com"
-          
+
           git add .
-          git commit -m "docs: automated update" || exit 0
-          git pull --rebase origin master
-          git push origin HEAD:master
+
+          git diff --cached --quiet && exit 0
+
+          git commit -m "docs: automated update"
+          git push origin master
