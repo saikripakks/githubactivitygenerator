@@ -1,3 +1,5 @@
+079098d ci: fix detached head push and permissions
+8afbe26 docs: automated update
 930de68 s
 ca2dd4d ci: implement recommended best practices for workflow permissions and rebasing
 302151c docs: automated update
