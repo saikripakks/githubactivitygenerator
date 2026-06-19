@@ -1,3 +1,5 @@
+e60880c chore: update CI workflow to sync master branch and refine commit logic
+844d4fa docs: automated update
 079098d ci: fix detached head push and permissions
 8afbe26 docs: automated update
 930de68 s
