@@ -37,4 +37,5 @@ jobs:
           
           git add .
           git commit -m "docs: automated update" || exit 0
+          git pull --rebase origin master
           git push
